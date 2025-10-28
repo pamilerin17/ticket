@@ -71,11 +71,15 @@ function handleSignup() {
     return
   }
 
+  // Create and save user
   const newUser = { name: name.value, email: email.value, password: password.value }
   users.push(newUser)
   localStorage.setItem('ticketapp_users', JSON.stringify(users))
 
-  alert('Account created successfully! You can now log in.')
-  router.push('/login')
+  // Auto-login: save session
+  localStorage.setItem('ticketapp_session', JSON.stringify({ loggedIn: true, email: email.value }))
+
+  alert('Account created successfully! Redirecting to your dashboard...')
+  router.push('/dashboard') // ✅ Redirect to dashboard
 }
 </script>
